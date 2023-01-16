@@ -17,7 +17,7 @@
 - Cotización dólar (Dolarsi.com).
 
 ## Configuracion:
-Renombrar variables_example.js a variables.js.
+Renombrar ./js/variables_example.js a ./js/variables.js.
 
 #### Variables de variables.js.
 
