@@ -28,7 +28,7 @@ const time_slide = 5000;
 #### Timezone según https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 const timeZone = 'America/Argentina/Buenos_Aires';
 #### API KEY de OpenWeatherMap https://openweathermap.org/api
-const weather_apikey ='199f918678e7e48319bdbc62a3610f99';
+const weather_apikey ='API_KEY';
 #### Ciudad de https://openweathermap.org/find
 const weather_city ='neuquen';
 #### Lenguaje de https://openweathermap.org
@@ -39,3 +39,5 @@ const weather_units = 'metric';
 const weather_temp_symbol = '°C';
 #### Lenguaje para usar .toLocaleDateString y .toLocaleTimeString
 const formato = 'es-Ar'
+#### API KEY de https://newsapi.org
+const news_apikey ='API_KEY'

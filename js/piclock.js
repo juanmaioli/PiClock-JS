@@ -1,24 +1,28 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /*!
   * PiClock v1.0.0 (https://juanmaioli.com.ar/)
   * Copyright 2019-2022 Juan Maioli Author (https://github.com/juanmaioli/PiClock)
   * Licensed under MIT
   */
-setTimeout(function() { window.location.reload(); }, autorefresh);
+setTimeout(function() { window.location.reload() }, autorefresh)
 
 const carouselPpal = document.querySelector('#carouselPpal')
 const carousel = new bootstrap.Carousel(carouselPpal, {interval: time_slide, wrap: true})
 const longdate = document.querySelector('#longdate')
 const fechaShow = new Date()
-const optionsDate = {timeZone: timeZone,weekday: 'long',year: 'numeric',month: '2-digit',day: '2-digit'};
+const optionsDate = {timeZone: timeZone,weekday: 'long',year: 'numeric',month: '2-digit',day: '2-digit'}
 const optionsTime = {hour: '2-digit', minute:'2-digit'}
 
 longdate.innerHTML = fechaShow.toLocaleDateString(formato, optionsDate)
 run_Clock(timeZone)
 if(weather_apikey != 'API_KEY') {obtenerClima()}else{alert('Debe obtener una API KEY en https://openweathermap.org/api')}
+if(news_apikey != 'API_KEY') {obtenerNoticias()}else{alert('Debe obtener una API KEY en https://newsapi.org')}
 obtenerDolar()
 
+
 function run_Clock(timeZone){
-  const optionsClocok = {timeZone: timeZone,hour12: false,hour: '2-digit',minute: '2-digit',second: '2-digit'};
+  const optionsClocok = {timeZone: timeZone,hour12: false,hour: '2-digit',minute: '2-digit',second: '2-digit'}
   const actualTime = new Date()
   const timeToShow = actualTime.toLocaleTimeString([], optionsClocok)
   document.getElementById('divClock').innerHTML = timeToShow
@@ -27,8 +31,8 @@ function run_Clock(timeZone){
 
 async function obtenerClima(){
   const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + weather_city + '&units=' + weather_units + '&lang=' + weather_lang + '&appid=' +  weather_apikey
-  const response = await fetch(url);
-  const clima = await response.json();
+  const response = await fetch(url)
+  const clima = await response.json()
 
   const temp = document.querySelector('#temp')
   const weather_desc = document.querySelector('#weather_desc')
@@ -50,7 +54,7 @@ async function obtenerClima(){
   const png = clima.weather[0].icon + '.png'
   const ciudad = 'Clima En ' + clima.name
   const amanecer = new Date().sunrise(clima.coord.lat, clima.coord.lon)
-  const atardecer =  new Date().sunset(clima.coord.lat, clima.coord.lon);
+  const atardecer =  new Date().sunset(clima.coord.lat, clima.coord.lon)
   const tarjetas = document.querySelectorAll('.card')
 
   if(fechaShow.getHours() > amanecer.getHours() && fechaShow.getHours() < atardecer.getHours()){
@@ -66,8 +70,8 @@ async function obtenerClima(){
   }
 
   temp.innerHTML = clima.main.temp.toFixed(1) + weather_temp_symbol
-  weather_desc.innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1);
-  weather_desc.innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1);
+  weather_desc.innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1)
+  weather_desc.innerHTML = desc.charAt(0).toUpperCase() + desc.slice(1)
   icon.innerHTML = getIcon(png)
   city_name.innerHTML = ciudad
   city_name2.innerHTML = ciudad
@@ -89,8 +93,8 @@ async function obtenerDolar(){
   const valorVentaOficial = document.querySelector('#valorVentaOficial')
   const valorCompraBlue = document.querySelector('#valorCompraBlue')
   const valorVentaBlue = document.querySelector('#valorVentaBlue ')
-  const response = await fetch(url);
-  const dolar = await response.json();
+  const response = await fetch(url)
+  const dolar = await response.json()
 
   valorCompraOficial.innerHTML = '$' + dolar[0].casa.compra
   valorVentaOficial.innerHTML = '$' + dolar[0].casa.venta
@@ -98,70 +102,100 @@ async function obtenerDolar(){
   valorVentaBlue.innerHTML = '$' + dolar[1].casa.venta
 }
 
+async function obtenerNoticias(){
+  let total = 0
+  const url = 'https://newsapi.org/v2/top-headlines?country=ar&apiKey='+news_apikey
+  const noticias = document.querySelector('#noticias')
+  noticias.innerHTML = ''
+  const response = await fetch(url)
+  const ultimasNoticias = await response.json()
+  const resultados = ultimasNoticias.articles.length
+  for(let noticia of ultimasNoticias.articles){
+    total++
+    let imagenNoticia = ''
+    let descripcion = ''
+    if(noticia.urlToImage){imagenNoticia = `<div class="col"><img src="${noticia.urlToImage}" width="180px"></div>`}
+    if(noticia.description){descripcion = noticia.description.slice(0, 140)+'...'}
+    noticias.innerHTML +=`
+    <div class="carousel-item">
+      <div class="card rounded">
+        <div class="card-header"><h5 class="text-white"><i class="fa-light fa-newspaper text-primary"></i>&nbsp;${noticia.source.name}(${total} de ${resultados})</h5></div>
+        <div class="card-body">
+        <div class="row"><div class="col"><h5>${noticia.title}</h5></div></div>
+        <div class="row">
+        ${imagenNoticia}
+        <div class="col"><p class="fst-italic">${descripcion}</p></div>
+        </div>
+        </div>
+      </div>
+    </div>`
+  }
+}
+
 function getIcon(png){
   const iconosLista ={
-    "01d.png":"<i class='fal fa-sun text-warning fa-fw' alt='Soleado'></i>",
-    "01n.png":"<i class='fal fa-moon text-info fa-fw'></i>",
-    "02d.png":"<i class='fal fa-cloud-sun text-warning fa-fw'></i>",
-    "02n.png":"<i class='fal fa-cloud-moon text-info fa-fw'></i>",
-    "03d.png":"<i class='fal fa-cloud text-info fa-fw'></i>",
-    "03n.png":"<i class='fal fa-cloud text-info fa-fw'></i>",
-    "04d.png":"<i class='fal fa-cloud text-info fa-fw'></i>",
-    "04n.png":"<i class='fal fa-cloud text-info fa-fw'></i>",
-    "09d.png":"<i class='fal fa-cloud-rain text-info fa-fw'></i>",
-    "09n.png":"<i class='fal fa-cloud-rain text-info fa-fw'></i>",
-    "10d.png":"<i class='fal fa-cloud-sun-rain text-info fa-fw'></i>",
-    "10n.png":"<i class='fal fa-cloud-moon-rain text-info fa-fw'></i>",
-    "11d.png":"<i class='fal fa-bolt text-warning fa-fw'></i>",
-    "11n.png":"<i class='fal fa-bolt text-warning fa-fw'></i>",
-    "13d.png":"<i class='fal fa-snowflake text-primary fa-fw'></i>",
-    "13n.png":"<i class='fal fa-snowflake text-primary fa-fw'></i>",
-    "50d.png":"<i class='fal fa-smog text-white fa-fw'></i>",
+    '01d.png':'<i class="fal fa-sun text-warning fa-fw"></i>',
+    '01n.png':'<i class="fal fa-moon text-info fa-fw"></i>',
+    '02d.png':'<i class="fal fa-cloud-sun text-warning fa-fw"></i>',
+    '02n.png':'<i class="fal fa-cloud-moon text-info fa-fw"></i>',
+    '03d.png':'<i class="fal fa-cloud text-info fa-fw"></i>',
+    '03n.png':'<i class="fal fa-cloud text-info fa-fw"></i>',
+    '04d.png':'<i class="fal fa-cloud text-info fa-fw"></i>',
+    '04n.png':'<i class="fal fa-cloud text-info fa-fw"></i>',
+    '09d.png':'<i class="fal fa-cloud-rain text-info fa-fw"></i>',
+    '09n.png':'<i class="fal fa-cloud-rain text-info fa-fw"></i>',
+    '10d.png':'<i class="fal fa-cloud-sun-rain text-info fa-fw"></i>',
+    '10n.png':'<i class="fal fa-cloud-moon-rain text-info fa-fw"></i>',
+    '11d.png':'<i class="fal fa-bolt text-warning fa-fw"></i>',
+    '11n.png':'<i class="fal fa-bolt text-warning fa-fw"></i>',
+    '13d.png':'<i class="fal fa-snowflake text-primary fa-fw"></i>',
+    '13n.png':'<i class="fal fa-snowflake text-primary fa-fw"></i>',
+    '50d.png':'<i class="fal fa-smog text-white fa-fw"></i>',
   }
-  return iconosLista[png] || "<i class='fal fa-thermometer-half text-danger fa-fw'></i>"
+  return iconosLista[png] || '<i class="fal fa-thermometer-half text-danger fa-fw"></i>'
 }
 
 function direccionViento(deg) {
-  let val = Math.floor((deg / 22.5) + 0.5);
-  let arr = ["↑ N", "NNE", "↗ NE", "ENE", "→ E", "ESE", "↘ SE", "SSE", "↓ S", "SSO", "↙ SO", "OSO", "← O", "ONO", "↖ NO", "NNO"];
-  return arr[(val % 16)];
+  let val = Math.floor((deg / 22.5) + 0.5)
+  let arr = ['↑ N', 'NNE', '↗ NE', 'ENE', '→ E', 'ESE', '↘ SE', 'SSE', '↓ S', 'SSO', '↙ SO', 'OSO', '← O', 'ONO', '↖ NO', 'NNO']
+  return arr[(val % 16)]
 }
 
 
 function msToHMS( ms ) {
-  let seconds = ms / 1000;
+  let seconds = ms / 1000
   const hours = parseInt( seconds / 3600 )
   seconds = seconds % 3600
   const minutes = parseInt( seconds / 60 )
-  seconds = seconds % 60;
-  return ( hours+":"+minutes);
+  seconds = seconds % 60
+  return ( hours + ':' + minutes)
 }
 
 function getMoonPhase(year, month, day){
-  let c = e = jd = b = 0;
-    if (month < 3) {
-        year--;
-        month += 12;
-    }
-    ++month;
-    c = 365.25 * year;
-    e = 30.6 * month;
-    jd = c + e + day - 694039.09; //jd is total days elapsed
-    jd /= 29.5305882
-    b = parseInt(jd)
-    jd -= b
-    b = Math.round(jd * 8)
-    if (b >= 8 ) {b = 0}
+  let c = e = jd = b = 0
+  if (month < 3) {
+    year--
+    month += 12
+  }
+  ++month
+  c = 365.25 * year
+  e = 30.6 * month
+  jd = c + e + day - 694039.09 //jd is total days elapsed
+  jd /= 29.5305882
+  b = parseInt(jd)
+  jd -= b
+  b = Math.round(jd * 8)
+  if (b >= 8 ) {b = 0}
 
-    const fasesLista = {
-        0:'Luna Nueva',
-        1:'Luna Creciente',
-        2:'Cuarto Creciente',
-        3:'Luna Gibosa Creciente',
-        4:'Luna Llena',
-        5:'Luna Gibosa Menguante',
-        6:'Cuarto Menguante',
-        7:'Luna Creciente',
-    }
-    return  fasesLista[b] || 'Sin Datos'
+  const fasesLista = {
+    0:'Luna Nueva',
+    1:'Luna Creciente',
+    2:'Cuarto Creciente',
+    3:'Luna Gibosa Creciente',
+    4:'Luna Llena',
+    5:'Luna Gibosa Menguante',
+    6:'Cuarto Menguante',
+    7:'Luna Creciente',
+  }
+  return  fasesLista[b] || 'Sin Datos'
 }
