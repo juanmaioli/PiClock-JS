@@ -1,7 +1,11 @@
 /*Pi Clock Style Sheet V1.0*/
 .card{width:100%;height:95%;}
 .dayColor{background-color: #fff;color:#1D1D1D}
-.displayExt{font-size: 2.8em;}
+/* .displayExt{font-size: 2.8em;} */
 .nigthColor{background-color: #1D1D1D;color:#ddd}
-.separador{height:6em}
+/* .separador{height:6em} */
 body{font-family: 'Roboto', sans-serif;}
+h1{font-size: 15vw;}
+h3{font-size: 4vw;}
+h5{font-size: 4vw;}
+h6{font-size: 3vw;}

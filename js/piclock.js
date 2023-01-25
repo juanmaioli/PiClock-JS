@@ -17,7 +17,7 @@ const optionsTime = {hour: '2-digit', minute:'2-digit'}
 longdate.innerHTML = fechaShow.toLocaleDateString(formato, optionsDate)
 run_Clock(timeZone)
 if(weather_apikey != 'API_KEY') {obtenerClima()}else{alert('Debe obtener una API KEY en https://openweathermap.org/api')}
-if(news_apikey != 'API_KEY') {obtenerNoticias()}else{alert('Debe obtener una API KEY en https://newsapi.org')}
+// if(news_apikey != 'API_KEY') {obtenerNoticias()}else{alert('Debe obtener una API KEY en https://newsapi.org')}
 obtenerDolar()
 
 
@@ -100,14 +100,9 @@ async function obtenerDolar(){
   let variacionOficialTxt = '<i class="fa-regular fa-equals text-primary"></i>'
   let variacionBlueTxt = '<i class="fa-regular fa-equals text-primary"></i>'
 
-
   variacionOficialTxt = variacionOficial > 0 ? '<i class="fa-regular fa-arrow-up text-danger"></i>': variacionOficialTxt
-  console.log('variacionOficial: ', variacionOficial)
   variacionOficialTxt = variacionOficial < 0 ? '<i class="fa-regular fa-arrow-down text-success"></i>': variacionOficialTxt
-
-
   variacionBlueTxt = variacionBlue > 0 ? '<i class="fa-regular fa-arrow-up text-danger"></i>': variacionBlueTxt
-  console.log('variacionBlue: ', variacionBlue)
   variacionBlueTxt = variacionBlue < 0 ? '<i class="fa-regular fa-arrow-down text-success"></i>': variacionBlueTxt
 
   valorCompraOficial.innerHTML = '$' + dolar[0].casa.compra
