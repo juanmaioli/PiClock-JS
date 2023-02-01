@@ -31,6 +31,7 @@ function run_Clock(timeZone){
 
 async function obtenerClima(){
   const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + weather_city + '&units=' + weather_units + '&lang=' + weather_lang + '&appid=' +  weather_apikey
+  console.log('url : ', url )
   const response = await fetch(url)
   const clima = await response.json()
 
@@ -166,7 +167,7 @@ function getIcon(png){
 
 function direccionViento(deg) {
   let val = Math.floor((deg / 22.5) + 0.5)
-  let arr = ['↑ N', 'NNE', '↗ NE', 'ENE', '→ E', 'ESE', '↘ SE', 'SSE', '↓ S', 'SSO', '↙ SO', 'OSO', '← O', 'ONO', '↖ NO', 'NNO']
+  let arr = ['⬆️ N', '↗️NNE', '↗️ NE', '↗️ ENE', '➡️ E', '↘️ ESE', '↘️ SE', '↘️ SSE', '⬇️ S', '↙️ SSO', '↙️ SO', '↙️ OSO', '⬅️ O', '↖️ ONO', '↖️ NO', '↖️ NNO']
   return arr[(val % 16)]
 }
 
@@ -177,7 +178,7 @@ function msToHMS( ms ) {
   seconds = seconds % 3600
   const minutes = parseInt( seconds / 60 )
   seconds = seconds % 60
-  return ( hours + ':' + minutes)
+  return ( hours.toString().padStart(2,'00') + ':' + minutes.toString().padStart(2,'00'))
 }
 
 function getMoonPhase(year, month, day){
