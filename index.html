@@ -1,119 +1,148 @@
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-    <meta name="description" content="">
-    <meta name="author" content="Juan Maioli">
-    <meta name="author" content="https://juanmaioli.com.ar">
-    <title>PiClock</title>
-    <link rel="apple-touch-icon" sizes="57x57" href="./img/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="./img/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="./img/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="./img/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="./img/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="./img/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="./img/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="./img/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="./img/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="./img/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
-    <link rel="manifest" href="./img/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="./img/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css?version=5.2.3">
-    <!-- fontawesome.com -->
-    <link rel="stylesheet" href="css/all.min.css?version=6.2.1">
-    <!-- Pi Clock styles -->
-    <link rel="stylesheet" href="css/piclock.css?version=1.1.0" >
-    <!-- Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  </head>
-  <body class="fixed-nav" id="cuerpo">
-    <div class="container-fluid h-100">
-      <div id="carouselPpal" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col text-center">
-                  <h1><i class="fal fa-clock text-primary displayExt"></i>&nbsp;<span class="displayExt" id="divClock"></span></h1>
-                  <h6 id="longdate"></h6>
-                  </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="description" content="">
+  <meta name="author" content="Juan Maioli">
+  <meta name="author" content="https://juanmaioli.com.ar">
+  <title>PiClock</title>
+  <link rel="apple-touch-icon" sizes="57x57" href="./img/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./img/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./img/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./img/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./img/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./img/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./img/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./img/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./img/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./img/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+  <link rel="manifest" href="./img/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="./img/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css?version=5.2.3">
+  <!-- fontawesome.com -->
+  <link rel="stylesheet" href="css/all.min.css?version=6.2.1">
+  <!-- Pi Clock styles -->
+  <link rel="stylesheet" href="css/piclock.css?version=1.1.0">
+  <!-- Google Fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-nav" id="cuerpo">
+  <div class="container-fluid h-100">
+    <div id="carouselPpal" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="card-body">
+            <div class="row">
+              <div class="col text-center">
+                <h1><i class="fal fa-clock text-primary displayExt"></i>&nbsp;<span class="displayExt" id="divClock"></span></h1>
+                <h6 id="longdate"></h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <h1><span id="icon" class="displayExt"></span>&nbsp;<span id="temp" class="displayExt"></span></h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <h4><span id="weather_desc"></span></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item text-center p-1">
+          <div class="card rounded">
+            <div class="card-header">
+              <h5 id="city_name"></h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col text-start"></div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="feels_like"></h4>
                 </div>
-                <div class="row">
-                  <div class="col text-center">
-                  <h1><span id="icon" class="displayExt" ></span>&nbsp;<span id="temp" class="displayExt" ></span></h1>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="humidity"></h4>
                 </div>
-                <div class="row">
-                  <div class="col text-center">
-                  <h4><span id="weather_desc"></span></h4>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="wind"></h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="pressure"></h4>
                 </div>
               </div>
             </div>
-            <div class="carousel-item text-center p-1">
-              <div class="card rounded">
-                <div class="card-header"><h5 id ="city_name" ></h5></div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col text-start"></div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-start"><h4 id="feels_like"></h4></div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-start"><h4 id="humidity"></h4></div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-start"><h4 id="wind"></h4></div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-start"><h4 id="pressure"></h4></div>
-                  </div>
+          </div>
+        </div>
+        <div class="carousel-item  text-center p-1">
+          <div class="card rounded">
+            <div class="card-header">
+              <h5 id="city_name2"></h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="visibility"></h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="clouds"></h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4>
+                    <i class="fal fa-sunrise text-warning fa-fw"></i>&nbsp;<span id="sunrise"></span>&nbsp;
+                    <i class="fal fa-sunset text-warning fa-fw"></i>&nbsp;<span id="sunset"></span>
+                  </h4>
+                  <h4><i class="fas fa-sun text-warning fa-fw"></i>&nbsp;<span id="sunlight"></span>hs.</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-start">
+                  <h4 id="moon"></h4>
                 </div>
               </div>
             </div>
-            <div class="carousel-item  text-center p-1">
-            <div class="card rounded">
-                <div class="card-header"><h5 id ="city_name2"></h5></div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col text-start"><h4 id="visibility"></h4></div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-start"><h4 id="clouds"></h4></div>
-                  </div>
-                  <div class="row">
-                      <div class="col text-start"><h4>
-                      <i class="fal fa-sunrise text-warning fa-fw"></i>&nbsp;<span id="sunrise"></span>&nbsp;
-                      <i class="fal fa-sunset text-warning fa-fw"></i>&nbsp;<span id="sunset"></span></h4>
-                      <h4><i class="fas fa-sun text-warning fa-fw"></i>&nbsp;<span id="sunlight"></span>hs.</h4></div>
-                  </div>
-                  <div class="row">
-                      <div class="col text-start"><h4 id="moon"></h4></div>
-                  </div>
+          </div>
+        </div>
+        <div id="noticias"></div>
+        <div class="carousel-item">
+          <div class="card rounded">
+            <div class="card-header">
+              <h5>Cotización Dolarsi.com</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col text-center">
+                  <h3 class="text-center">
+                    <i class="fal fa-money-bill-wave text-success"></i>&nbsp;<span id="valorCompraOficial"></span>&nbsp;/&nbsp;<span id="valorVentaOficial"></span>
+                  </h3>
+                  <h3 class="text-center">
+                    <i class="fal fa-money-bill-wave text-primary"></i>&nbsp;<span id="valorCompraBlue"></span>&nbsp;/&nbsp;<span id="valorVentaBlue"></span>
+                  </h3>
                 </div>
               </div>
             </div>
-            <div id="noticias"></div>
-            <div class="carousel-item">
-            <div class="card rounded">
-                <div class="card-header"><h5>Cotización Dolarsi.com</h5></div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col text-center">
-                    <h3 class="text-center"><i class="fal fa-money-bill-wave text-success"></i>&nbsp;<span id="valorCompraOficial"></span>&nbsp;/&nbsp;<span id="valorVentaOficial"></span></h3>
-                    <h3 class="text-center"><i class="fal fa-money-bill-wave text-primary"></i>&nbsp;<span id="valorCompraBlue"></span>&nbsp;/&nbsp;<span id="valorVentaBlue"></span></h3>
-                    </div>
-                  </div>
-              </div>
-            </div>
+          </div>
           <!-- Left and right controls -->
           <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -121,16 +150,18 @@
           <a class="carousel-control-next" href="#demo" data-slide="next">
             <span class="carousel-control-next-icon"></span>
           </a> -->
-          </div>
         </div>
+      </div>
+    </div>
   </div>
-    <!-- Bootstrap JS-->
-    <script src="js/bootstrap.bundle.min.js?version=5.4.0"></script>
-    <!-- Variables -->
-    <script src="js/variables.js?version=0.0.1"></script>
-    <!-- Sun JS https://github.com/Triggertrap/sun-js -->
-    <script src="js/sun.js"></script>
-    <!-- Pi Clock JS -->
-    <script src="js/piclock.js?version=0.0.2"></script>
-  </body>
+  <!-- Bootstrap JS-->
+  <script src="js/bootstrap.bundle.min.js?version=5.4.0"></script>
+  <!-- Variables -->
+  <script src="js/variables.js?version=0.0.1"></script>
+  <!-- Sun JS https://github.com/Triggertrap/sun-js -->
+  <script src="js/sun.js"></script>
+  <!-- Pi Clock JS -->
+  <script src="js/piclock.js?version=0.0.2"></script>
+</body>
+
 </html>
