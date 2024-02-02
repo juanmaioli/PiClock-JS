@@ -21,6 +21,13 @@ if(weather_apikey != 'API_KEY') {obtenerClima()}else{alert('Debe obtener una API
 obtenerDolar()
 
 
+/**
+ * La función `run_Clock` muestra la hora actual en la zona horaria especificada y la actualiza cada
+ * segundo.
+ * @param timeZone - El parámetro timeZone se usa para especificar la zona horaria para la que desea
+ * mostrar el reloj. Debe ser un identificador de zona horaria válido, como "América/Nueva_York" o
+ * "Europa/Londres".
+ */
 function run_Clock(timeZone){
   const optionsClocok = {timeZone: timeZone,hour12: false,hour: '2-digit',minute: '2-digit',second: '2-digit'}
   const actualTime = new Date()
@@ -28,6 +35,10 @@ function run_Clock(timeZone){
   document.getElementById('divClock').innerHTML = timeToShow
   setTimeout('run_Clock()', 1000)
 }
+/**
+ * La función anterior es una función asíncrona que obtiene datos meteorológicos de una API y actualiza
+ * los elementos HTML con los datos recuperados.
+ */
 
 async function obtenerClima(){
   const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + weather_city + '&units=' + weather_units + '&lang=' + weather_lang + '&appid=' +  weather_apikey
@@ -112,6 +123,10 @@ async function obtenerDolar(){
   valorVentaBlue.innerHTML = '$' + dolar[1].casa.venta + '&nbsp;'  + variacionBlueTxt
 }
 
+/**
+ * La función `obtenerNoticias` obtiene los últimos artículos de noticias de una API específica y los
+ * muestra en una página web.
+ */
 async function obtenerNoticias(){
   let total = 0
   const url = 'https://newsapi.org/v2/top-headlines?country=ar&apiKey='+news_apikey
