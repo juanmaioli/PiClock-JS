@@ -100,27 +100,28 @@ async function obtenerClima(){
 }
 
 async function obtenerDolar(){
-  const url = 'https://www.dolarsi.com/api/api.php?type=valoresprincipales'
+  const url = '../dolar.php'
   const valorCompraOficial = document.querySelector('#valorCompraOficial')
   const valorVentaOficial = document.querySelector('#valorVentaOficial')
   const valorCompraBlue = document.querySelector('#valorCompraBlue')
   const valorVentaBlue = document.querySelector('#valorVentaBlue ')
   const response = await fetch(url)
   const dolar = await response.json()
-  const variacionOficial = parseFloat(dolar[0].casa.variacion.replace(',','.')).toFixed(2)
-  const variacionBlue = parseFloat(dolar[1].casa.variacion.replace(',','.')).toFixed(2)
-  let variacionOficialTxt = '<i class="fa-regular fa-equals text-primary"></i>'
-  let variacionBlueTxt = '<i class="fa-regular fa-equals text-primary"></i>'
+  console.log('dolar: ', dolar)
+  // const variacionOficial = parseFloat(dolar[0].casa.variacion.replace(',','.')).toFixed(2)
+  // const variacionBlue = parseFloat(dolar[1].casa.variacion.replace(',','.')).toFixed(2)
+  // let variacionOficialTxt = '<i class="fa-regular fa-equals text-primary"></i>'
+  // let variacionBlueTxt = '<i class="fa-regular fa-equals text-primary"></i>'
 
-  variacionOficialTxt = variacionOficial > 0 ? '<i class="fa-regular fa-arrow-up text-danger"></i>': variacionOficialTxt
-  variacionOficialTxt = variacionOficial < 0 ? '<i class="fa-regular fa-arrow-down text-success"></i>': variacionOficialTxt
-  variacionBlueTxt = variacionBlue > 0 ? '<i class="fa-regular fa-arrow-up text-danger"></i>': variacionBlueTxt
-  variacionBlueTxt = variacionBlue < 0 ? '<i class="fa-regular fa-arrow-down text-success"></i>': variacionBlueTxt
+  // variacionOficialTxt = variacionOficial > 0 ? '<i class="fa-regular fa-arrow-up text-danger"></i>': variacionOficialTxt
+  // variacionOficialTxt = variacionOficial < 0 ? '<i class="fa-regular fa-arrow-down text-success"></i>': variacionOficialTxt
+  // variacionBlueTxt = variacionBlue > 0 ? '<i class="fa-regular fa-arrow-up text-danger"></i>': variacionBlueTxt
+  // variacionBlueTxt = variacionBlue < 0 ? '<i class="fa-regular fa-arrow-down text-success"></i>': variacionBlueTxt
 
-  valorCompraOficial.innerHTML = '$' + dolar[0].casa.compra
-  valorVentaOficial.innerHTML = '$' + dolar[0].casa.venta + '&nbsp;'  + variacionOficialTxt
-  valorCompraBlue.innerHTML = '$' + dolar[1].casa.compra
-  valorVentaBlue.innerHTML = '$' + dolar[1].casa.venta + '&nbsp;'  + variacionBlueTxt
+  valorCompraOficial.innerHTML = '$' + dolar.CompraOficial
+  valorVentaOficial.innerHTML = '$' + dolar.VentaOficial + '&nbsp;'//  + variacionOficialTxt
+  valorCompraBlue.innerHTML = '$' + dolar.CompraBlue
+  valorVentaBlue.innerHTML = '$' + dolar.VentaBlue + '&nbsp;'//  + variacionBlueTxt
 }
 
 /**
